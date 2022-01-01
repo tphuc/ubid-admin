@@ -2,7 +2,6 @@
 
 import useSWR from 'swr'
 import { supabase } from '..'
-import { MAX_ITEMS_PER_PAGE } from '../../../config'
 
 
 const ENDPOINT = 'items'
@@ -10,7 +9,7 @@ const ENDPOINT = 'items'
 
 
 const fetcher = async (ENDPOINT, filter) => {
-    const LIMIT = MAX_ITEMS_PER_PAGE;
+
     let res = supabase.from(ENDPOINT).select(`
         *,
         category (
@@ -20,7 +19,10 @@ const fetcher = async (ENDPOINT, filter) => {
             *
         ),
         bids (
-            *
+            *,
+            user:users (
+                *
+            )
         )
     `, { count: 'exact' })
 
@@ -39,8 +41,8 @@ const fetcher = async (ENDPOINT, filter) => {
     }
 
     
-    res = await res.range((filter['page'] - 1) * LIMIT, filter['page'] * LIMIT - 1)
-    // res = await res.limit(LIMIT)
+
+
     
 
     return res

@@ -13,7 +13,8 @@ export default function DashboardLayout({ headerTitle, children }) {
                 <Navbar.Section grow mt="lg">
                     <NavLinks items={[
                         { label: "categories", path: '/dashboard/categories' },
-                        { label: "users", path: '/dashboard/users' }
+                        { label: "users", path: '/dashboard/users' },
+                        { label: "items", path: '/dashboard/items' }
                     ]} />
                 </Navbar.Section>
             </Navbar>}

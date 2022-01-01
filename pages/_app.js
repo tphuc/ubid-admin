@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
 
 export default function App(props) {
   const { Component, pageProps } = props;
@@ -15,6 +16,7 @@ export default function App(props) {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ModalsProvider>
+        <NotificationsProvider>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
@@ -27,6 +29,7 @@ export default function App(props) {
       >
         <Component {...pageProps} />
       </MantineProvider>
+      </NotificationsProvider>
       </ModalsProvider>
     </>
   );

@@ -51,3 +51,9 @@ export async function getItem(id){
 
     return res
 }
+
+
+export async function deleteItem(id){
+    let res = await supabase.from('items').delete().match({id})
+    return res;
+}
