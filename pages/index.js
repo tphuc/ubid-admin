@@ -5,10 +5,13 @@ import { useForm } from '@mantine/hooks';
 import { supabase } from '../frameworks/supabase';
 import { useRouter } from 'next/router';
 import React from 'react'
+import { useNotifications } from '@mantine/notifications';
 
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
+  const notifications = useNotifications()
+  
   const form = useForm({
     initialValues: {
       email: '',
@@ -23,8 +26,14 @@ export default function Home() {
   const onSubmit = async (data) => {
       setLoading(true)
       let res = await supabase.auth.signIn(data)
-      if(res.user.role == 'supabase_admin'){
+      console.log(res)
+      if(res?.user?.role == 'supabase_admin'){
         router.push('/dashboard')
+      }
+      else{
+        notifications.showNotification({
+          message:res?.error?.message
+        })
       }
       setLoading(false)
   }

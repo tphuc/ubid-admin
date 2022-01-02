@@ -5,3 +5,8 @@ export async function updateUser(data){
     let res = await supabase.from('users').update(data).match({id: user.id})
     return res
 }
+
+export async function updateUserById(id, data){
+    let res = await supabase.from('users').update(data).match({id: id})
+    return res
+}
