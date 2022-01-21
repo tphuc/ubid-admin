@@ -13,7 +13,7 @@ import { useNotifications } from '@mantine/notifications';
 
 export default function Items() {
     const { data: categories } = useCategories();
-    const { data: items } = useItems();
+    const { data: items, mutate } = useItems();
     const notifications = useNotifications();
     console.log(items)
     const modals = useModals();
@@ -41,6 +41,7 @@ export default function Items() {
                 <Button onClick={async () => {
                     let res = await deleteItem(item?.id)
                     if(!res.error){
+                        mutate()
                         notifications.showNotification({
                             title: 'Delete Item',
                             message: 'Successfully removed item from database',
